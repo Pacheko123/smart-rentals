@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% extends "login/base.html" %}
+	<title>{% block title %}Sign Up{% endblock %}</title>
+
+</head>
+{% block content %}
+<body>
+	<!-- {{ stm }} -->
+
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-6 offset-md-3 mt-5 pt-5" >
+				<h3>SIGN UP</h3>
+				
+				<form method="post" action="{% url 'register' %}" name="register">
+					{% csrf_token %}
+			    <div class="uk-margin">
+			        <div class="uk-inline">
+			            <span class="uk-form-icon " uk-icon="icon: user"></span>
+			            <input class="uk-input uk-form-width-large" type="text" placeholder="Username" name="username">
+			        </div>
+			    </div>
+			    <div class="uk-margin">
+			        <div class="uk-inline">
+			            <span class="uk-form-icon " uk-icon="icon: mail"></span>
+			            <input class="uk-input uk-form-width-large" type="text" placeholder="Email address" name="mail">
+			        </div>
+			    </div>
+
+
+			    <div class="uk-margin">
+			        <div class="uk-inline">
+			            <span class="uk-form-icon" uk-icon="icon: lock"></span>
+			            <input class="uk-input uk-form-width-large" type="password" placeholder="password" name="password">
+			        </div>
+			    </div>
+			    <div class="uk-margin">
+			        <div class="uk-inline">
+			            <span class="uk-form-icon" uk-icon="icon: lock"></span>
+			            <input class="uk-input uk-form-width-large" type="password" placeholder="Confirm password" name="cpassword">
+			        </div>
+			    </div>
+			    <button  type = "submit" class="uk-button uk-button-default">Register</button>  or <a href="{%url 'log' %}"> Log In</a>
+			</form>
+		    <!-- <input class="uk-checkbox" type="checkbox"> Remember me<br> -->
+
+   	
+   	<div><hr> <a href="{%url 'home' %}"> www.pachekohousing.com</a></div>
+
+
+</form>
+</div>
+</div>
+</div>
+
+<div id="particles-js"></div>
+
+</body>
+{% endblock %}
+</html>

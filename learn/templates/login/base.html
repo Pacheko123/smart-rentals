@@ -1,0 +1,30 @@
+
+{% load static %}
+
+	<!-- <title>Login</title> -->
+	<title>{% block title %}My amazing site{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="{%static  'login/css/uikit.min.css' %}">
+	<script src="{%static 'login/js/app.js' %}"></script>
+	<script src="{%static 'login/js/package.json' %}"></script>
+	<script src="{%static 'login/js/particles.js' %}"></script>
+	<script type="text/javascript" src="{%static 'login/js/uikit.min.js' %}"></script>
+	<script type="text/javascript" src="{%static 'login/js/uikit-icons.min.js' %}"></script>
+
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Goldman&family=Montserrat:wght@100&display=swap" rel="stylesheet"> 
+		<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+	<!-- Google Fonts Roboto -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+	<!-- Bootstrap core CSS -->
+	<link rel="stylesheet" href="{%static 'login/css/bootstrap.min.css' %}">
+	<!-- Material Design Bootstrap -->
+	<link rel="stylesheet" href="{%static 'login/css/mdb.min.css' %}">
+	<!-- Your custom styles (optional) -->
+	<link rel="stylesheet" href="{%static 'login/css/style.css' %}">
+
+
+	{% block content %}{% endblock %}

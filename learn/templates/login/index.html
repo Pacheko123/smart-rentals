@@ -1,0 +1,90 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	{% extends "login/base.html" %}
+	{% load static %}
+	<title>{% block title %}E Apartments{% endblock %}</title>
+</head>
+
+{% block content %}
+<body>
+	<nav class="uk-navbar-container uk-margin uk-navbar-transparent" uk-navbar>
+    <div class="uk-navbar-center">
+
+        <div class="uk-navbar-center-left"><div>
+            <ul class="uk-navbar-nav">
+                <li class="uk-active"><a href="#">Home</a></li>
+                <li>
+                    <a href="#">LOGIN</a>
+                    <div class="uk-navbar-dropdown animation: uk-animation-slide-top-small; duration: 1000">
+                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                            <!-- <li class="uk-active"><a href="#">LOGIN</a></li> -->
+                            <li class="uk-active"><a href="{% url 'log' %}">TENANT</a></li>
+                            <li class="uk-active"><a href="#">OWNER</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div></div>
+        <a class="uk-navbar-item uk-logo" href="#">Pacheko.</a>
+        
+        <div class="uk-navbar-center-right"><div>
+            <ul class="uk-navbar-nav">
+                <li><a href="{% url 'register' %}">SIGNUP</a></li>
+            </ul>
+        </div>
+        <div class="uk-navbar-center-right"><div>
+            <ul class="uk-navbar-nav">
+                <li><a href="{% url 'register' %}">OWNER</a></li>
+            </ul>
+        </div>
+    </div>
+
+    </div>
+</nav>
+
+
+
+
+	<div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slideshow="autoplay: true animation: scale ratio: false">
+
+    <ul class="uk-slideshow-items" uk-height-viewport="offset-top: true; offset-bottom: 10">
+        <li>
+            <div class="uk-position-cover uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
+                <img src="{%static 'login/img/1.jpg' %}" alt="" uk-cover>
+            </div>
+            <div class="uk-position-center uk-position-small uk-text-center uk-light">
+                <h2 class="uk-margin-remove" uk-slideshow-parallax="x: 100,-100" >Pacheko Apartments.</h2>
+                <p class="uk-margin-remove" uk-slideshow-parallax="x: 200,-200">Bringing you the best experience in housing and accomodation industry.</p>
+            </div>
+        </li>
+        <li>
+            <div class="uk-position-cover uk-animation-kenburns uk-animation-reverse uk-transform-origin-top-right">
+                <img src="{%static 'login/img/3.jpg' %}" alt="" uk-cover>
+            </div>
+            <div class="uk-position-center uk-position-small uk-text-center uk-light">
+                <h2 class="uk-margin-remove" uk-slideshow-parallax="y: -75,0,0; opacity: 1,1,0">Pacheko Apartments.</h2>
+                <p class="uk-margin-remove" uk-slideshow-parallax="y: 50,0,0; opacity: 1,1,0">Create a free account to connect.</p>
+            </div>
+        </li>
+        <li>
+            <div class="uk-position-cover uk-animation-kenburns uk-animation-reverse uk-transform-origin-bottom-left">
+                <img src="{%static 'login/img/4.jpg' %}" alt="" uk-cover>
+            </div>
+            <div class="uk-position-center uk-position-small uk-text-center uk-light">
+                 <h2 class="uk-margin-remove" uk-slideshow-parallax="x: 100,-100" >Pacheko Apartments.</h2>
+                <p class="uk-margin-remove" uk-slideshow-parallax="x: 200,-200">Bringing you the best experience in housing and accomodation industry.</p>
+            </div>
+        </li>
+    </ul>
+
+    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+
+</div>
+</body>
+{% endblock %}
+
+</html>
