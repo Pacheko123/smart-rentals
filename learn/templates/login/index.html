@@ -10,6 +10,7 @@
 
 {% block content %}
 <body>
+    
 	<nav class="uk-navbar-container uk-margin uk-navbar-transparent" uk-navbar>
     <div class="uk-navbar-center">
 
@@ -39,6 +40,18 @@
             <ul class="uk-navbar-nav">
                 <li><a href="{% url 'register' %}">OWNER</a></li>
             </ul>
+        </div>
+    <!-- </div> -->
+
+    <div class="uk-navbar-center-right pt-4" ><div>
+            <!-- <div class="uk-margin"> -->
+                <ul class="uk-navbar-nav">
+    <form class="uk-search uk-search-default">
+        <a href="" class="uk-search-icon-flip" uk-search-icon></a>
+        <input class="uk-search-input" type="search" placeholder="Search...">
+    </form>
+</ul>
+<!-- </div> -->
         </div>
     </div>
 
@@ -86,5 +99,6 @@
 </div>
 </body>
 {% endblock %}
+
 
 </html>

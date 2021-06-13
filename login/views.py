@@ -12,17 +12,20 @@ def index(request):
 
 def log(request):
 	if request.method == 'POST':
+
 		name = request.POST['username']
 		username = request.POST['password']
+		
 		query = Tuser.objects.filter(username = name,password = username).exists()
 		# password = Tuser.Objects.get(password = password)
 
 		if query:
 			# return HttpResponse("Details in Database")
+			request.session['username'] = name
 			context={
 			'stm':'Details exists in the Database'
 			}
-			return render(request,'login/login.html',context)
+			return render(request,'login/dashboard.html',context)
 
 		else:
 			return HttpResponse("Details Mismatch")
@@ -43,4 +46,10 @@ def register(request):
 			return HttpResponse("password does not match")
 	else:
 		return render(request,'login/register.html')
+
+def dashboard(request):
+	if 'username' not in request.session:
+		return render(request,'login/login.html')
+	else:
+		return render(request,'login/dashboard.html')
 	
