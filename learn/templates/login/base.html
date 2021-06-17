@@ -2,7 +2,8 @@
 {% load static %}
 
 	<!-- <title>Login</title> -->
-	<title>{% block title %}My amazing site{% endblock %}</title>
+	<!-- <title>{% block title %}My amazing site{% endblock %}</title> -->
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"> 
 	<link rel="stylesheet" type="text/css" href="{%static  'login/css/uikit.min.css' %}">
 	<script src="{%static 'login/js/app.js' %}"></script>
 	<script src="{%static 'login/js/package.json' %}"></script>
@@ -23,6 +24,26 @@
 	<link rel="stylesheet" href="{%static 'login/css/mdb.min.css' %}">
 	<!-- Your custom styles (optional) -->
 	<link rel="stylesheet" href="{%static 'login/css/style.css' %}">
+
+
+	<!-- admin dashboard -->
+	<link href="{%static 'login/dist/css/AdminLTE.min.css' %}" rel="stylesheet" type="text/css">
+	    <!--  -->
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link href="{%static 'login/dist/css/skins/_all-skins.min.css' %}" rel="stylesheet" type="text/css" />
+    <!-- iCheck -->
+    <link href="{%static 'login/plugins/iCheck/flat/blue.css' %}" rel="stylesheet" type="text/css" />
+    <!-- Morris chart -->
+    <link href="{%static 'login/plugins/morris/morris.css' %}" rel="stylesheet" type="text/css" />
+    <!-- jvectormap -->
+    <link href="{%static 'login/plugins/jvectormap/jquery-jvectormap-1.2.2.css' %}" rel="stylesheet" type="text/css" />
+    <!-- Date Picker -->
+    <link href="{%static 'login/plugins/datepicker/datepicker3.css' %}" rel="stylesheet" type="text/css" />
+    <!-- Daterange picker -->
+    <link href="{%static 'login/plugins/daterangepicker/daterangepicker-bs3.css' %}" rel="stylesheet" type="text/css" />
+    <!-- bootstrap wysihtml5 - text editor -->
+    <link href="{%static 'login/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css' %}" rel="stylesheet" type="text/css" />
 
 
 	{% block content %}{% endblock %}

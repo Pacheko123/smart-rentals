@@ -1,7 +1,12 @@
+import requests
+import json
 from django.shortcuts import render
 from django.shortcuts import redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import  Tuser
+
+# mmpesa imports
+
 
 # Create your views here.
 def index(request):
@@ -52,4 +57,43 @@ def dashboard(request):
 		return render(request,'login/login.html')
 	else:
 		return render(request,'login/dashboard.html')
+
+def mpesa(request):
 	
+	if request.method == "POST":
+		phone = request.POST['phone']
+		amount = request.POST['amount']
+
+		# import requests
+
+
+		headers = {
+		  'Content-Type': 'application/json',
+		  'Authorization': 'Bearer cQGxbAl54zibmSJuo9e7SGNDW1AP'
+		}
+
+		payload = {
+		    "BusinessShortCode": 174379,
+		    "Password": "MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMjEwNjE3MTE0OTA2",
+		    "Timestamp": "20210616221303",
+		    "TransactionType": "CustomerPayBillOnline",
+		    "Amount": amount,
+		    "PartyA":phone,
+		    "PartyB": 174379,
+		    "PhoneNumber": phone,
+		    "CallBackURL": "https://omugatvc.ac.ke/btc.html",								
+		    "AccountReference": "Pacheko Inc",
+		    "TransactionDesc": "Payment of goods" 
+		  }
+		response = requests.request("POST", 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest', headers = headers, data = payload)
+		text = response.text.encode('utf8')
+		print(response.text.encode('utf8'))
+		context={
+			'stm':text
+		}
+
+		# return JsonResponse(list(response), safe=False)
+		return render(request,'login/response.html',context)
+
+	else:
+		return render(request,'login/mpesa.html')

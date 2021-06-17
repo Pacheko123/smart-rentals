@@ -23,4 +23,6 @@ urlpatterns = [
     path('login/',views.log, name = 'log'),
     path('register/',views.register, name = 'register'),
     path('dashboard/',views.dashboard, name = 'dashboard'),
+    path('mpesa/',views.mpesa, name = 'mpesa'),
+
 ]
