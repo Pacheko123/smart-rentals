@@ -24,5 +24,6 @@ urlpatterns = [
     path('register/',views.register, name = 'register'),
     path('dashboard/',views.dashboard, name = 'dashboard'),
     path('mpesa/',views.mpesa, name = 'mpesa'),
+    path('access/token', views.getAccessToken, name='get_mpesa_access_token'),
 
 ]

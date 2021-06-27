@@ -1,9 +1,12 @@
 import requests
+from django.http import HttpResponse, JsonResponse
+from requests.auth import HTTPBasicAuth
 import json
 from django.shortcuts import render
 from django.shortcuts import redirect
-from django.http import HttpResponse, JsonResponse
 from .models import  Tuser
+from . mpesa_credentials import MpesaAccessToken, LipanaMpesaPpassword
+import re
 
 # mmpesa imports
 
@@ -20,7 +23,9 @@ def log(request):
 
 		name = request.POST['username']
 		username = request.POST['password']
-		
+
+		username = str(username)
+
 		query = Tuser.objects.filter(username = name,password = username).exists()
 		# password = Tuser.Objects.get(password = password)
 
@@ -58,42 +63,51 @@ def dashboard(request):
 	else:
 		return render(request,'login/dashboard.html')
 
+def getAccessToken(request):
+    consumer_key = 'EYGsE99F8jnF0smLsOF9imMwsYvA8KNA'
+    consumer_secret = '2VMAr9hwlzIAJdFg'
+    api_URL = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials'
+    r = requests.get(api_URL, auth=HTTPBasicAuth(consumer_key, consumer_secret))
+    mpesa_access_token = json.loads(r.text)
+    # global validated_mpesa_access_token
+    validated_mpesa_access_token = mpesa_access_token['access_token']
+    return HttpResponse(validated_mpesa_access_token)
+
 def mpesa(request):
-	
+
 	if request.method == "POST":
 		phone = request.POST['phone']
 		amount = request.POST['amount']
 
-		# import requests
-
-
-		headers = {
-		  'Content-Type': 'application/json',
-		  'Authorization': 'Bearer cQGxbAl54zibmSJuo9e7SGNDW1AP'
+		phone = re.sub('0', '254', phone, 1)
+		print(phone)
+		phone = int(phone)
+		access_token = MpesaAccessToken.validated_mpesa_access_token
+		api_url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
+		# api_url = "https://sandbox.safaricom.co.ke/"
+		auth = {
+		  "Content-Type": "application/json",
+		  "Authorization": "Bearer %s" % access_token
 		}
 
 		payload = {
-		    "BusinessShortCode": 174379,
-		    "Password": "MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMjEwNjE3MTE0OTA2",
-		    "Timestamp": "20210616221303",
+		    "BusinessShortCode": LipanaMpesaPpassword.Business_short_code,
+		    "Password": LipanaMpesaPpassword.decode_password,
+		    "Timestamp": LipanaMpesaPpassword.lipa_time,
 		    "TransactionType": "CustomerPayBillOnline",
 		    "Amount": amount,
 		    "PartyA":phone,
-		    "PartyB": 174379,
+		    "PartyB": LipanaMpesaPpassword.Business_short_code,
 		    "PhoneNumber": phone,
-		    "CallBackURL": "https://omugatvc.ac.ke/btc.html",								
-		    "AccountReference": "Pacheko Inc",
-		    "TransactionDesc": "Payment of goods" 
+		    "CallBackURL": "https://pacheko.com/",
+		    "AccountReference": "Pacheko Consortium",
+		    "TransactionDesc": "Payment of goods"
 		  }
-		response = requests.request("POST", 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest', headers = headers, data = payload)
-		text = response.text.encode('utf8')
-		print(response.text.encode('utf8'))
-		context={
-			'stm':text
-		}
 
-		# return JsonResponse(list(response), safe=False)
-		return render(request,'login/response.html',context)
+		# response = requests.post(api_url, headers=auth, data=payload)
+		payload1 = json.dumps(payload)
+		response = requests.request("POST", api_url, headers = auth, data = payload1)
+		return HttpResponse(response)
 
 	else:
 		return render(request,'login/mpesa.html')
